@@ -1,4 +1,5 @@
 #from poland with dev yolo
+PROGRAM KTÓRY LISTUJE ZDJĘCIA  W WYBRANYM KATALOGU KTÓRE ODPOWIADAJĄ PODANYM KRYTERIOM
 Instrukcja obslugi:
 
 
