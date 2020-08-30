@@ -1,10 +1,4 @@
-// This code is written at BigVision LLC. It is based on the OpenCV project. It is subject to the license terms in the LICENSE file found in this distribution and at http://opencv.org/license.html
 
-
-
-// Usage example:  ./object_detection_yolo.out --video=run.mp4
-
-//                 ./object_detection_yolo.out --image=bird.jpg
 
 #include <fstream>
 
@@ -86,15 +80,11 @@ vector<String> getOutputsNames(const Net& net);
 
 
 
-
-
-
-
 void ParsePattern(string pattern, vector<string>&HasArray,vector<string>&NoArray)
 
 {
 
-        string has = pattern.substr(pattern.find("Has"),pattern.find("No"));
+    string has = pattern.substr(pattern.find("Has"),pattern.find("No"));
 
     has=has.substr(has.find("{")+1);
 
@@ -112,8 +102,6 @@ void ParsePattern(string pattern, vector<string>&HasArray,vector<string>&NoArray
 
 
 
-
-
     istringstream stringstr(has);
 
     string str;
@@ -124,9 +112,7 @@ void ParsePattern(string pattern, vector<string>&HasArray,vector<string>&NoArray
 
         str.erase(remove_if(str.begin(), str.end(), ::isspace),str.end());
 
-        HasArray.push_back(str);
-
-        
+        HasArray.push_back(str);       
 
     }
 
@@ -138,15 +124,9 @@ void ParsePattern(string pattern, vector<string>&HasArray,vector<string>&NoArray
 
          str.erase(remove_if(str.begin(), str.end(),::isspace),str.end());
 
-        NoArray.push_back(str);
-
-        
+        NoArray.push_back(str);     
 
     }
-
-
-
-
 
 }
 
@@ -170,8 +150,6 @@ bool PatternPass(set<string>keywords,vector<string>hasKeywords,vector<string>noK
 
         }
 
-
-
     }
 
     if(ret == true)
@@ -189,8 +167,6 @@ bool PatternPass(set<string>keywords,vector<string>hasKeywords,vector<string>noK
                 break;
 
                 }
-
-
 
         }
 
@@ -264,13 +240,9 @@ int main(int argc, char** argv)
 
   }
 
-
-
     return 0;
 
 }
-
-
 
 
 
@@ -278,9 +250,9 @@ void checkFile(string filePath,set<string>&keywords)
 
 {
 
-     try {  
+    try {  
 
-            cap.open(filePath);
+        cap.open(filePath);
 
            
 
@@ -290,41 +262,37 @@ void checkFile(string filePath,set<string>&keywords)
 
         cout << "Could not open the input image/video stream" << endl;
 
-      return;
+        return;
 
     }
 
-
-
-        // get frame from the video
-
-        cap >> frame;
+    cap >> frame;
 
 
 
-        // Create a 4D blob from a frame.
+    // Create a 4D blob from a frame.
 
-        blobFromImage(frame, blob, 1/255.0, cv::Size(inpWidth, inpHeight), Scalar(0,0,0), true, false);
+    blobFromImage(frame, blob, 1/255.0, cv::Size(inpWidth, inpHeight), Scalar(0,0,0), true, false);
 
-        
+    
 
-        //Sets the input to the network
+    //Sets the input to the network
 
-        net.setInput(blob);
+    net.setInput(blob);
 
-        
+    
 
-        // Runs the forward pass to get output of the output layers
+    // Runs the forward pass to get output of the output layers
 
-        vector<Mat> outs;
+    vector<Mat> outs;
 
-     
+    
 
-       net.forward(outs, getOutputsNames(net));
+    net.forward(outs, getOutputsNames(net));
 
 
 
-        postprocess(frame, outs,keywords);
+    postprocess(frame, outs,keywords);
 
 
 
@@ -338,11 +306,7 @@ void checkFile(string filePath,set<string>&keywords)
 
      string jpgPath=dirPath+"/*.jpg";
 
-   
-
-   
-
-     vector<cv::String> fn;
+    vector<cv::String> fn;
 
     glob(jpgPath, fn, true);
 
@@ -360,10 +324,6 @@ void checkFile(string filePath,set<string>&keywords)
 
    
 
-   
-
-    // vector<cv::String> fn;
-
     glob(jpegPath, fn, true);
 
     for(cv::String str : fn)
@@ -376,15 +336,9 @@ void checkFile(string filePath,set<string>&keywords)
 
 
 
-
-
     string pngPath=dirPath+"/*.png";
 
     
-
-    
-
-    //  vector<cv::String> fn;
 
     glob(pngPath, fn, true);
 
@@ -463,10 +417,6 @@ void postprocess(Mat& frame, const vector<Mat>& outs,set<string>&keywords)
 }
 
 
-
-
-
-// Get the names of the output layers
 
 vector<String> getOutputsNames(const Net& net)
 
