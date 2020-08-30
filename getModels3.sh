@@ -1,0 +1,1 @@
+wget https://github.com/pjreddie/darknet/blob/master/data/coco.names?raw=true -O ./coco.names
